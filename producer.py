@@ -35,15 +35,6 @@ def produce_traffic_data():
     save_work_item_payloads(payloads)
 
 
-@task
-def consume_traffic_data():
-    """
-    Inhuman Insurance, Inc. Artificial Intelligence System automation.
-    Consumes traffic data work items.
-    """
-    print("consume")
-
-
 def load_traffic_data_as_table():
     json_data = json.load_json_from_file(TRAFFIC_JSON_FILE_PATH)
     return table.create_table(json_data["value"])
@@ -59,7 +50,6 @@ def filter_and_sort_traffic_data(data):
 
 
 def get_latest_data_by_country(data):
-    country_key = "SpatialDim"
     data = table.group_table_by_column(data, COUNTRY_KEY)
     latest_data_by_country = []
     for group in data:
